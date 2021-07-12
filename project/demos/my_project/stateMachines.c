@@ -2,48 +2,42 @@
 #include "stateMachines.h"
 #include "led.h"
 #include "switches.h"
-char interruptTime;
+#include "buzzer.h"
 
+char interruptTime;
 
 
 void blink_button_advance(){
 
-  //Turn on Normal light
+  // Turn on Normal light
   if(switch_state_down_1){
     interruptTime=0;
     turn_on_red();
+    buzzer_set_period(2551);
    }
   
   // Turn on half DIM light
   else if(switch_state_down_2){
     interruptTime=2;
-    turn_on_red();    
+    turn_on_red();
+    buzzer_set_period(3214);
    }
   
   // Turn on Full DIM light
   else if (switch_state_down_3){
     interruptTime=0;
     turn_on_red();
-    turn_off_red(); 
+    turn_off_red();
+    buzzer_set_period(3822);
 } 
   // Turn off light
   else{
     turn_off_red();
+    buzzer_set_period(0);
   }
 }
 
-  /*
-  if(blink_count == interruptTime) {          // Change to zero to make brightest 
-    state_advance();                          // Turn on red
-    blink_count=0;
-    //state_advance_1();                      // Uncomment to make most dim
-  }
-  else if(blink_count <= interruptTime){
-    state_advance_1();                        // Turn off red
-    blink_count++; 
-  }
-  */
-
+// Helper functions
 void turn_on_red(){ 
   red_on=1;
   led_changed = 1;

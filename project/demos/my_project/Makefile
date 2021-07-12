@@ -15,7 +15,7 @@ blink.elf: ${COMMON_OBJECTS} main.o stateMachines.o led.o wdInterruptHandler.o .
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 #### For button and blink ####
-run.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o main.o switches.o stateMachines.o led.o wdInterruptHandler.o ../lib/libTimer.a
+run.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o main.o buzzer.o switches.o stateMachines.o led.o wdInterruptHandler.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 # where .o files are comming from
@@ -23,6 +23,7 @@ wdInterruptHandler.o: stateMachines.h
 switches.o: switches.h
 stateMachines.o: led.h stateMachines.h
 led.o: led.c led.h
+buzzer.o: buzzer.h
 
 load: blink.elf
 	msp430loader.sh blink.elf
