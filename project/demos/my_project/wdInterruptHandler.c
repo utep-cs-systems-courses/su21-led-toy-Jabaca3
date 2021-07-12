@@ -7,20 +7,15 @@ void
 __interrupt_vec(WDT_VECTOR) WDT(){
   static char blink_count = 0;
   static char buzz_count = 0;
-  /*
- if(++blink_count == interruptTime){
-    blink_button_advance(blink_count);
+
+  if(blink_count == interruptTime){
+    blink_button_advance();
     blink_count=0;
   }
-  */
-    if(blink_count == interruptTime){
-      blink_button_advance(blink_count);                            
-      blink_count=0;
+  
+  else if(blink_count <= interruptTime){
+    turn_off_red();
+    blink_count++;
   }
- 
-    else if(blink_count <= interruptTime){
-        turn_off_red();
-	blink_count++;
-    }
- }
+}
   

@@ -2,10 +2,11 @@
 #include "stateMachines.h"
 #include "led.h"
 #include "switches.h"
-char interruptTime=0;
+char interruptTime;
 
-void blink_button_advance(char blink_count){
-  char changed = 0;
+
+
+void blink_button_advance(){
 
   //Turn on Normal light
   if(switch_state_down_1){
@@ -15,15 +16,15 @@ void blink_button_advance(char blink_count){
   
   // Turn on half DIM light
   else if(switch_state_down_2){
-    //call some other function in interrupt handler
     interruptTime=2;
     turn_on_red();    
    }
   
   // Turn on Full DIM light
   else if (switch_state_down_3){
-      turn_on_red();
-      turn_off_red(); 
+    interruptTime=0;
+    turn_on_red();
+    turn_off_red(); 
 } 
   // Turn off light
   else{
