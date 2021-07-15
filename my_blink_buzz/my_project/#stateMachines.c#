@@ -33,7 +33,7 @@ void blink_button_advance(){
   
   // Count to 3
   else if(switch_state_down_4){
-    interruptTime=150;
+    interruptTime=250;
     button_four=1;
     buzzer_set_period(0);
     static char state =0;
@@ -78,5 +78,3 @@ void turn_off_green(){
   led_changed=1;
   led_update();
 }
-
-

@@ -14,7 +14,9 @@ __interrupt_vec(WDT_VECTOR) WDT(){
   }
   
   else if(blink_count <= interruptTime){
+    if(!button_four){
     turn_off_red();
+    }
     blink_count++;
   }
 }

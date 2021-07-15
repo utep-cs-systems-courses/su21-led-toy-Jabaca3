@@ -2,9 +2,10 @@
 #include "led.h"
 
 	.arch msp430g2553
-		
+	.p2align 1,0	
 	.text
 	.extern P1DIR
+	.extern P1OUT
 	.extern LEDS
 	.extern LED_RED
 	.extern LED_GREEN

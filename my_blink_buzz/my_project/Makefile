@@ -10,26 +10,16 @@ AS              = msp430-elf-as
 
 all: run.elf 
 
-##### For BLINK ONLY ####
-blink.elf: ${COMMON_OBJECTS} main.o stateMachines.o led.o wdInterruptHandler.o ../lib/libTimer.a
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
-
-#### For button and blink ####
 run.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o main.o buzzer.o switches.o stateMachines.o led.o wdInterruptHandler.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
-# where .o files are comming from
 wdInterruptHandler.o: stateMachines.h
 switches.o: switches.h
 stateMachines.o: led.h stateMachines.h
-led.o: led.c led.h
+led.o: led_s.s led.h
 buzzer.o: buzzer.h
 
-load: blink.elf
-	msp430loader.sh blink.elf
-
-load2: run.elf
+load: run.elf
 	msp430loader.sh run.elf
-
 clean:
 	rm -f *.o *.elf *# *~
